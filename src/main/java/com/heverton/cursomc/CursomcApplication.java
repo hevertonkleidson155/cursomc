@@ -9,8 +9,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.heverton.cursomc.domain.Categoria;
+import com.heverton.cursomc.domain.Cidade;
+import com.heverton.cursomc.domain.Estado;
 import com.heverton.cursomc.domain.Produto;
 import com.heverton.cursomc.repositories.CategoriaRepository;
+import com.heverton.cursomc.repositories.CidadeRepository;
+import com.heverton.cursomc.repositories.EstadoRepository;
 import com.heverton.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -21,6 +25,12 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -36,8 +46,12 @@ public class CursomcApplication implements CommandLineRunner{
 		Produto p2 = new Produto(null,"Impressora",800.00);
 		Produto p3 = new Produto(null,"Mouse",40.00);
 		
-		cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
-		cat2.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
+		
+		Cidade c1 = new Cidade(null, "Uberlândia", est1);
+		Cidade c2 = new Cidade(null, "São Paulo", est2);
+		Cidade c3 = new Cidade(null, "Campinas", est2);
 		
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
@@ -46,7 +60,14 @@ public class CursomcApplication implements CommandLineRunner{
 		categoriaRepository.save(Arrays.asList(cat1,cat2));
 		produtoRepository.save(Arrays.asList(p1,p2,p3));
 		
+		est1.getCidade().addAll(Arrays.asList(c1));
+		est2.getCidade().addAll(Arrays.asList(c2,c3));
 		
+		cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+		cat2.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+		
+		estadoRepository.save(Arrays.asList(est1,est2));
+		cidadeRepository.save(Arrays.asList(c1,c2,c3));
 		
 	}
 
