@@ -17,4 +17,6 @@ public class CategoriaService {
 		Categoria obj = repo.findOne(id);//Usa o obj de repositorio para ir buscar no banco o id
 		return obj;
 	}
+	
+	
 }
