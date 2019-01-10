@@ -19,6 +19,7 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String Nome;
+	
 	@JsonManagedReference //Quero que o produto venha para cá quando eu procurar
 	@ManyToMany(mappedBy="categorias")//Esse mapeamento foi realizado na classe Produtos e na variavel categorias
 	private List<Produto> produtos = new ArrayList<>();//Categoria tem uma lista de produtos
