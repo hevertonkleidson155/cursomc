@@ -22,5 +22,11 @@ public class CategoriaService {
 		return obj;
 	}
 	
+	public Categoria insert(Categoria obj) {
+		
+		obj.setId(null); //Se nao colocar o id nulo e passarem o id no objeto que ta chegando o metodo save vai achar que e uma atualizacao e nao insersao
+		return repo.save(obj);
+	}
+	
 	
 }
