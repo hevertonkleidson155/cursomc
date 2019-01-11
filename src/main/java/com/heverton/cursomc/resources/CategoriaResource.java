@@ -2,6 +2,7 @@ package com.heverton.cursomc.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.heverton.cursomc.domain.Categoria;
+import com.heverton.cursomc.dto.CategoriaDTO;
 import com.heverton.cursomc.services.CategoriaService;
 
 @RestController
@@ -60,10 +62,13 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();//Resposta ok e no corpo  responde o objeto  
 	}
 	
+	// BUSCAR TODAS AS CATEGORIAS
 	@RequestMapping(method=RequestMethod.GET)//Pega o id passado pelo /{id}
-	public ResponseEntity<List<Categoria>> findAll() {//Responde uma entidade qualquer funcao find(poderia ser outro nome) e usa o id que recebeu via get como parâmetro
+	public ResponseEntity<List<CategoriaDTO>> findAll() {//Responde uma entidade qualquer funcao find(poderia ser outro nome) e usa o id que recebeu via get como parâmetro
 		
 		List<Categoria> list = service.findAll();//Cria um objeto com a resposta da função buscar contida em objeto de CategoriaServices pasasndo o id que recebeu de parâmetro
-		return ResponseEntity.ok().body(list);//Resposta ok e no corpo  responde o objeto  
+		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(listDto);//Resposta ok e no corpo  responde o objeto  
 	}
 }
