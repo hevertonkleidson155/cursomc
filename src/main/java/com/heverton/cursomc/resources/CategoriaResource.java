@@ -51,4 +51,13 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	// DELETE 
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)//Pega o id passado pelo /{id}
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {//Responde uma entidade qualquer funcao find(poderia ser outro nome) e usa o id que recebeu via get como parâmetro
+		
+		service.delete(id);//Cria um objeto com a resposta da função buscar contida em objeto de CategoriaServices pasasndo o id que recebeu de parâmetro
+		
+		return ResponseEntity.noContent().build();//Resposta ok e no corpo  responde o objeto  
+	}
+	
 }
