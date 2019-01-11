@@ -14,7 +14,7 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo; //Cria um objeto de repositorio
 	
-	public Cliente buscar(Integer id) {
+	public Cliente find(Integer id) {
 		Cliente obj = repo.findOne(id);//Usa o obj de repositorio para ir buscar no banco o id
 		if(obj==null){
 			throw new ObjectNotFoundException("NOT_FOUND");

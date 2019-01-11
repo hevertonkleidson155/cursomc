@@ -14,7 +14,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo; //Cria um objeto de repositorio
 	
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 		Categoria obj = repo.findOne(id);//Usa o obj de repositorio para ir buscar no banco o id
 		if(obj==null){
 			throw new ObjectNotFoundException("NOT_FOUND");
@@ -28,5 +28,9 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 	
+	public Categoria update(Categoria obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
 	
 }
