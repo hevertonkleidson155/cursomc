@@ -1,6 +1,7 @@
 package com.heverton.cursomc.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -56,8 +57,13 @@ public class CategoriaResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {//Responde uma entidade qualquer funcao find(poderia ser outro nome) e usa o id que recebeu via get como parâmetro
 		
 		service.delete(id);//Cria um objeto com a resposta da função buscar contida em objeto de CategoriaServices pasasndo o id que recebeu de parâmetro
-		
 		return ResponseEntity.noContent().build();//Resposta ok e no corpo  responde o objeto  
 	}
 	
+	@RequestMapping(method=RequestMethod.GET)//Pega o id passado pelo /{id}
+	public ResponseEntity<List<Categoria>> findAll() {//Responde uma entidade qualquer funcao find(poderia ser outro nome) e usa o id que recebeu via get como parâmetro
+		
+		List<Categoria> list = service.findAll();//Cria um objeto com a resposta da função buscar contida em objeto de CategoriaServices pasasndo o id que recebeu de parâmetro
+		return ResponseEntity.ok().body(list);//Resposta ok e no corpo  responde o objeto  
+	}
 }
