@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -35,21 +37,20 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);//Resposta ok e no corpo  responde o objeto  
 	}
 	
-	// POST localhost:8080/categorias e body {"nome": "Computadores"} -> cria a categoria com o id seguite ao que já existe
+	// POST localhost:8080/categorias e body (mudar no contenty type para json) {"nome": "Computadores"} -> cria a categoria com o id seguite ao que já existe
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Categoria obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
+		Categoria obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-		
 		return ResponseEntity.created(uri).build();
-		
 	}
 	
 	// PUT localhost:8080/categorias/1 e body {"nome": "OutroNome"} -> Atualiza a categoria com o id passado
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
-		
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id){
+		Categoria obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		

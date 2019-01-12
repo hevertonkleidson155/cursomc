@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.heverton.cursomc.domain.Categoria;
+import com.heverton.cursomc.dto.CategoriaDTO;
 import com.heverton.cursomc.repositories.CategoriaRepository;
 import com.heverton.cursomc.services.exceptions.DataIntegrityException;
 import com.heverton.cursomc.services.exceptions.ObjectNotFoundException;
@@ -61,4 +62,7 @@ public class CategoriaService {
 		return repo.findAll(pageRequest);
 	}
 	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
+	}
 }
