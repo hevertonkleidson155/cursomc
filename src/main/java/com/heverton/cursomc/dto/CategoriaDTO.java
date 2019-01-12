@@ -8,7 +8,7 @@ public class CategoriaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private String Nome;
+	private String nome;
 	
 	public CategoriaDTO() {
 		
@@ -16,7 +16,7 @@ public class CategoriaDTO implements Serializable{
 	
 	public CategoriaDTO(Categoria obj) {
 		id = obj.getId();
-		Nome = obj.getNome();
+		nome = obj.getNome();
 	}
 
 	public Integer getId() {
@@ -28,11 +28,11 @@ public class CategoriaDTO implements Serializable{
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 	
 	

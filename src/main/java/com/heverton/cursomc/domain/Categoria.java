@@ -16,7 +16,7 @@ public class Categoria implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String Nome;
+	private String nome;
 	
 	//Quero que o produto venha para cá quando eu procurar
 	@ManyToMany(mappedBy="categorias")//Esse mapeamento foi realizado na classe Produtos e na variavel categorias
@@ -29,7 +29,7 @@ public class Categoria implements Serializable{
 	public Categoria(Integer id, String nome) {
 		super();
 		this.id = id;
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public Integer getId() {
@@ -41,11 +41,11 @@ public class Categoria implements Serializable{
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 	
 
