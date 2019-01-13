@@ -19,12 +19,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.heverton.cursomc.domain.Cliente;
 import com.heverton.cursomc.dto.ClienteDTO;
+import com.heverton.cursomc.dto.ClienteNewDTO;
 import com.heverton.cursomc.services.ClienteService;
 
 @RestController
 @RequestMapping(value = "/clientes") // Quando requisitarem uma /categorias
 public class ClienteResource {
-
+	
 	// Cria uma objeto de ClienteService que e responsavel pelos comandos "SQL"
 	@Autowired
 	private ClienteService service;
@@ -38,18 +39,14 @@ public class ClienteResource {
 										// ClienteServices pasasndo o id que recebeu de parâmetro
 		return ResponseEntity.ok().body(obj);// Resposta ok e no corpo responde o objeto
 	}
-	/*
-	 * // POST localhost:8080/categorias e body (mudar no contenty type para json)
-	 * {"nome": "Computadores"} -> cria a categoria com o id seguite ao que já
-	 * existe
-	 * 
-	 * @RequestMapping(method=RequestMethod.POST) public ResponseEntity<Void>
-	 * insert(@Valid @RequestBody ClienteDTO objDto) { Cliente obj =
-	 * service.fromDTO(objDto); obj = service.insert(obj); URI uri =
-	 * ServletUriComponentsBuilder.fromCurrentRequest()
-	 * .path("/{id}").buildAndExpand(obj.getId()).toUri(); return
-	 * ResponseEntity.created(uri).build(); }
-	 */
+	
+	 // POST localhost:8080/categorias e body (mudar no contenty type para json){"nome": "Computadores"} -> cria a categoria com o id seguite ao que já existe
+	 @RequestMapping(method=RequestMethod.POST)
+	 public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) { 
+		 Cliente obj =service.fromDTO(objDto);
+		 obj = service.insert(obj); 
+		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri(); return ResponseEntity.created(uri).build(); 
+	 }
 
 	// PUT localhost:8080/categorias/1 e body {"nome": "OutroNome", "email":
 	// "email@email.com"} -> Atualiza a categoria com o id passado
