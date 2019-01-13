@@ -2,21 +2,42 @@ package com.heverton.cursomc.dto;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.heverton.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="O campo nome não pode ser vazio")
+	@Length(min=5,max=120, message="Nome muito curto, favor corrigir o campo nome")
 	private String nome;
+	
+	@NotEmpty(message="O campo nome não pode ser vazio")
+	@Email(message="Email inválido")
 	private String email;
+	
+	@NotEmpty(message="O campo nome não pode ser vazio")
 	private String cpfOuCnpj;
+	
 	private Integer tipo ;
+	@NotEmpty(message="O campo nome não pode ser vazio")
 	
 	private String logradouro;
+	@NotEmpty(message="O campo nome não pode ser vazio")
 	private String numero;
 	private String complemento;
 	private String bairro;
+	
+	@NotEmpty(message="O campo nome não pode ser vazio")
 	private String cep;
 	
+	@NotEmpty(message="O campo nome não pode ser vazio")
 	private String telefone1;
+	
 	private String telefone2;
 	private String telefone3;
 	
