@@ -2,6 +2,8 @@ package com.heverton.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -18,6 +20,7 @@ public class ClienteDTO implements Serializable{
 	
 	@NotEmpty(message="O campo nome não pode ser vazio")
 	@Email(message="Email inválido")
+	//@Column(unique=true) - torna o campo único no banco. Não deixando inserir dado repetido. Mas você não vai ter controle caso dê erro para fazer uma respota bonitinha
 	private String email;
 	
 	
