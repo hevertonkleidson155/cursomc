@@ -2,14 +2,14 @@ package com.heverton.cursomc.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.heverton.cursomc.domain.Cliente;
+import com.heverton.cursomc.services.validation.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable{
 	private static final long serialVersionUID = 1L; 
 	
