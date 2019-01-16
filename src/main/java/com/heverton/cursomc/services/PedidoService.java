@@ -40,7 +40,8 @@ public class PedidoService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	
+	@Autowired
+	private EmailService emailService;
 	
 	public Pedido buscar(Integer id) {
 		Pedido obj = repo.findOne(id);//Usa o obj de repositorio para ir buscar no banco o id
@@ -71,7 +72,7 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.save(obj.getItens());
-		System.out.print(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 		
