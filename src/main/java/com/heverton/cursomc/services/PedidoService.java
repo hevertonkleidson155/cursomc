@@ -72,7 +72,8 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.save(obj.getItens());
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
+		System.out.println("Passou aqui");
 		return obj;
 	}
 		
