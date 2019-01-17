@@ -24,8 +24,11 @@ public class ClienteNewDTO implements Serializable{
 	private String cpfOuCnpj;
 	
 	private Integer tipo ;
-	@NotEmpty(message="O campo nome não pode ser vazio")
 	
+	@NotEmpty(message="O campo nome não pode ser vazio")
+	private String senha;
+	
+	@NotEmpty(message="O campo nome não pode ser vazio")
 	private String logradouro;
 	@NotEmpty(message="O campo nome não pode ser vazio")
 	private String numero;
@@ -86,6 +89,17 @@ public class ClienteNewDTO implements Serializable{
 
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+	
+	
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 
