@@ -20,6 +20,7 @@ import com.heverton.cursomc.domain.PagamentoComCartão;
 import com.heverton.cursomc.domain.Pedido;
 import com.heverton.cursomc.domain.Produto;
 import com.heverton.cursomc.enums.EstadoPagamento;
+import com.heverton.cursomc.enums.Perfil;
 import com.heverton.cursomc.enums.TipoCliente;
 import com.heverton.cursomc.repositories.CategoriaRepository;
 import com.heverton.cursomc.repositories.CidadeRepository;
@@ -125,14 +126,19 @@ public class DBService {
 
 		Cliente cli1 = new Cliente(null, "Maria Silva", "Maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("232313213", "1233123"));
+		
+		Cliente cli2 = new Cliente(null, "Anna", "anna@gmail.com", "39434523010", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123"));
+		cli2.addPerfil(Perfil.ADMIN);
+		cli1.getTelefones().addAll(Arrays.asList("2323423", "32234234"));
 
 		Endereco e1 = new Endereco(null, "Rua Flores", "332", "Apt. 32", "Jardim", "32424234", cli1, c1);
 		Endereco e2 = new Endereco(null, "Av. Matos", "23", "Apt. 112", "Centro", "33424234", cli1, c2);
+		Endereco e3 = new Endereco(null, "Av. nhe", "13", "Apt. 132", "Local", "21312321", cli2, c2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 
-		clienteRepository.save(Arrays.asList(cli1));
-		enderecoRepository.save(Arrays.asList(e1, e2));
+		clienteRepository.save(Arrays.asList(cli1,cli2));
+		enderecoRepository.save(Arrays.asList(e1, e2,e3));
 
 		SimpleDateFormat sds = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido ped1 = new Pedido(null, sds.parse("30/09/2017 10:39"), cli1, e1);
